@@ -14,6 +14,10 @@ function onLoad()
     emu.addEventCallback(loop, emu.eventType.endFrame) -- main loop
 end
 
+function emu.registerexit(callback)
+    emu.addEventCallback(callback, emu.eventType.scriptEnded)
+end
+
 function emu.framecount()
     return emu.getState().ppu.frameCount
 end
