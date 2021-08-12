@@ -8,9 +8,11 @@
         "DEFAULTURL",
         "DEFAULTSECRET",
         "AUTOCONNECT",
-        "LOGGING"
+        "LOGGING",
+        "bit"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
-    ]
+    ],
+    "Lua.runtime.version": "Lua 5.1"
 }
