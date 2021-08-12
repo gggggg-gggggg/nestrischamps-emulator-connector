@@ -62,6 +62,7 @@ function newGameStarted()
         pieceX = -1,
         pieceY = -1,
         pieceID = -1,
+        startframe = emu.framecount()
     }
 
     playfield.initialize()
@@ -75,6 +76,7 @@ playfield.initialize()
 frameManager.update(0, 0)
 
 function loop()
+    if emu.framecount() - (state.startframe or 0) < 4 then return end -- wait for 4 frames at the beginning of the game for the score to reset
     local gameState = getGameState()
     local pieceState = getPieceState()
     local time = socket.gettime()*1000
@@ -85,6 +87,8 @@ function loop()
     if gameState == 4 then --ingame, rocket, highscoreentry
         if previousGameState ~= 4 then -- just started a game!
             newGameStarted()
+            previousGameState = gameState
+            return
         end
 
         if pieceState == 1 then -- piece active
