@@ -1,4 +1,8 @@
-require("iuplua")
+local has_iuplua = false
+pcall(function()
+    require("iuplua")
+    has_iuplua = true
+end)
 local dialog
 
 function createDialog()
@@ -57,7 +61,7 @@ end
 function onLoad()
     if AUTOCONNECT then
         connect(DEFAULTURL, DEFAULTSECRET)
-    else
+    elseif has_iuplua then
         createDialog()
     end
 
