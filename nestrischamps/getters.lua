@@ -7,7 +7,26 @@ function getGameState() -- gameState is a global thing for which menu/demo/gamep
 end
 
 function getScore()
-	local scoreLeft = tonumber(string.format("%x", memory.readbyte(0x0055)))
+	local letters = {a = 10, b = 11, c = 12, d = 13, e = 14, f = 15}
+	local byte = string.format("%02x", memory.readbyte(0x0055))
+	local scoreLeft = tonumber(byte)
+	if not scoreLeft then
+		local left = string.sub(byte, 1, 1)
+		local right = string.sub(byte, 2, 2)
+		if letters[left] then
+			local r = tonumber(right)
+			if not r then
+				r = letters[right]
+			end
+			scoreLeft = letters[left] * 10 + r
+		elseif letters[right] then
+			local l = tonumber(left)
+			if not l then
+				l = letters[left]
+			end
+			scoreLeft = l * 10 + letters[right]
+		end
+	end
 
 	local scoreMiddle = tonumber(string.format("%x", memory.readbyte(0x0054)))
 
