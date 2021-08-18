@@ -63,6 +63,8 @@ function onLoad()
         connect(DEFAULTURL, DEFAULTSECRET)
     elseif has_iuplua then
         createDialog()
+    else
+        connect(DEFAULTURL, DEFAULTSECRET)
     end
 
     while true do -- main loop
