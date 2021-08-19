@@ -59,12 +59,10 @@ function createDialog()
 end
 
 function onLoad()
-    if AUTOCONNECT then
+    if AUTOCONNECT or not has_iuplua then
         connect(DEFAULTURL, DEFAULTSECRET)
-    elseif has_iuplua then
-        createDialog()
     else
-        connect(DEFAULTURL, DEFAULTSECRET)
+        createDialog()
     end
 
     while true do -- main loop
